@@ -23,7 +23,7 @@ apiRouter.post('/signup', (req, res, next) => {
 
 apiRouter.post('/signin', auth(), (req, res, next) => {
   res.cookie('auth', req.token);
-  res.send({ user: req.user, token: req.token });
+  res.send(req.token);
 });
 
 apiRouter.get('/oauth', (req, res, next) => {
@@ -34,7 +34,7 @@ apiRouter.get('/oauth', (req, res, next) => {
     .catch(next);
 });
 
-// generates a key for indefinite use.
+
 apiRouter.post('/key', auth(), (req, res, next) => {
   let key = req.user.generateKey();
   res.status(200).send(key);
